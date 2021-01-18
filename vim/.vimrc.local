@@ -39,3 +39,5 @@ nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+
+imap <F5> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>]"]
