@@ -1,1 +1,2 @@
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'morhetz/gruvbox'

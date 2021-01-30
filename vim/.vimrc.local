@@ -41,3 +41,13 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
 imap <F5> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>]"]
+
+colorscheme gruvbox
+
+
+inoremap <C-s>     <C-O>:update<cr>
+nnoremap <C-s>     :update<cr>
+
+inoremap <C-Q>     <esc>:q<cr>
+nnoremap <C-Q>     :q<cr>
+vnoremap <C-Q>     <esc>
