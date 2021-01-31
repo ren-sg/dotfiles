@@ -51,3 +51,5 @@ nnoremap <C-s>     :update<cr>
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
 vnoremap <C-Q>     <esc>
+
+set mouse=a
