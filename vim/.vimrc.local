@@ -53,3 +53,6 @@ nnoremap <C-Q>     :q<cr>
 vnoremap <C-Q>     <esc>
 
 set mouse=a
+
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
