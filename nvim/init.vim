@@ -736,3 +736,8 @@ nnoremap gdl :diffget //3<CR>
 
 imap <F5> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>]"]
 
+"" Neovide
+let g:neovide_refresh_rate=165
+let neovide_remember_window_size = v:true
+let g:neovide_no_idle=v:true
+" set guifont=Ubuntu:h15
