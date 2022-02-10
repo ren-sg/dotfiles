@@ -43,7 +43,8 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_24b_colour=false
+# tmux_conf_24b_colour=false
+tmux_conf_24b_colour=true
 
 # default theme
 tmux_conf_theme_colour_1="#080808"    # dark gray
@@ -408,3 +409,7 @@ bind -n M-h select-pane -L
 bind -n M-j select-pane -D 
 bind -n M-k select-pane -U
 bind -n M-l select-pane -R
+
+set -g default-command /usr/bin/fish
+set -g default-shell /usr/bin/fish
+set -g default-terminal "xterm-256color"
