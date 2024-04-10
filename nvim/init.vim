@@ -9,7 +9,7 @@ call plug#begin()
 "" Plug 'junegunn/limelight.vim'
 
 
-Plug 'brooth/far.vim'
+" Plug 'brooth/far.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -44,7 +44,7 @@ Plug 'chriskempson/base16-vim'
 " Plug 'stephenway/postcss.vim'
 
 " Ctags
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 
 " Linters
@@ -55,7 +55,7 @@ Plug 'w0rp/ale'
 
 " Python3
 Plug 'SirVer/ultisnips'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 " Plug 'ambv/black'
 " Plug 'davidhalter/jedi-vim'
 
@@ -68,6 +68,12 @@ Plug 'sbdchd/neoformat'
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 
+"Debug
+" Plug 'mfussenegger/nvim-dap'
+
+" Zen mode
+Plug 'folke/zen-mode.nvim'
+
 
 "==================== Plugin_template {{{
 "=============================
@@ -77,6 +83,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " let g:virtualenv_directory = '/home/renal/.config/nvim'
 " let g:ale_virtualenv_dir_names = []
+set shell=/bin/bash
 
 let g:python2_host_prog = '/usr/bin/python2'
 " let g:python2_host_prog = '/home/renal/.config/nvim/plugged/python-support.nvim/autoload/nvim_py2/bin/python2.7'
@@ -238,11 +245,12 @@ let g:NERDTreeWinSize=40
 let g:NERDTreeMouseMode=3
 
 " colorscheme
-let base16colorspace=256
+" let base16colorspace=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " colorscheme gruvbox 
-set t_Co=256
+" set t_Co=256
 set termguicolors
-" set background=light
+set background=dark
 " colorscheme PaperColor
 colorscheme base16-ocean
 
@@ -434,7 +442,26 @@ if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+  " command! -bang -nargs=* Rg
+  " \ call fzf#vim#grep(
+  " \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  " \   fzf#vim#with_preview(), <bang>0)
 endif
+
+" command! -bang -nargs=* Rg2
+"   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+
+
+" function! RipgrepFzf(query, fullscreen)
+"   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+"   let initial_command = printf(command_fmt, shellescape(a:query))
+"   let reload_command = printf(command_fmt, '{q}')
+"   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+"   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+" endfunction
+
+" command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 
 
@@ -751,7 +778,6 @@ let neovide_remember_window_size = v:true
 let g:neovide_no_idle=v:true
 " set guifont=Ubuntu:h15
 
-
 " ----------------------------------------------------------------------------
 " NERDTrees File highlighting
 " ----------------------------------------------------------------------------
@@ -791,3 +817,5 @@ let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets th
 
 let g:WebDevIconsDefaultFolderSymbolColor = s:beige " sets the color for folders that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue " sets the color for files that did not match any rule
+
+nnoremap <silent> <Leader>z       :ZenMode <CR>
