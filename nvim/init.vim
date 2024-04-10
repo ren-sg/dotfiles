@@ -11,6 +11,8 @@ call plug#begin()
 
 Plug 'brooth/far.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -260,6 +262,7 @@ augroup END
 filetype on
 set textwidth=100 
 set encoding=utf-8
+set encoding=UTF-8
 syntax on
 set tabstop=4
 set shiftwidth=4
@@ -317,6 +320,9 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 " ----------------------------------------------------------------------------
 " Leader mappings.
 " ----------------------------------------------------------------------------
+
+nnoremap <silent> <Leader>ic :source $MYVIMRC<cr>
+nnoremap <silent> <Leader>i :e $MYVIMRC<cr>
 
 " <Leader><Leader> -- Open last buffer.
 nnoremap <Leader><Leader> <C-^>
@@ -451,6 +457,9 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" let g:fzf_action = { \ 'ctrl-t': 'tab split', \ 'ctrl-x': 'split', \ 'ctrl-v': 'vsplit' }
+let g:fzf_action = { 'ctrl-s': 'vsplit' }
 
 " command! -bang -nargs=? -complete=dir Files
 "   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -741,3 +750,44 @@ let g:neovide_refresh_rate=165
 let neovide_remember_window_size = v:true
 let g:neovide_no_idle=v:true
 " set guifont=Ubuntu:h15
+
+
+" ----------------------------------------------------------------------------
+" NERDTrees File highlighting
+" ----------------------------------------------------------------------------
+
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+let s:darkBlue = "44788E"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = 'FE405F'
+let s:git_orange = 'F54D27'
+
+
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['css'] = s:blue " sets the color of css files to blue
+
+
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['php'] = s:pink " sets the color of css files to blue
+
+let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange " sets the color for .gitignore files
+
+let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
+
+let g:WebDevIconsDefaultFolderSymbolColor = s:beige " sets the color for folders that did not match any rule
+let g:WebDevIconsDefaultFileSymbolColor = s:blue " sets the color for files that did not match any rule
