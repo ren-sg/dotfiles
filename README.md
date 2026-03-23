@@ -5,17 +5,17 @@
 - nvim
 
 
-#### Исполняемые файлы php и composer через docker
+#### Исполняемые файлы php и composer через docker php-docker
+
+Скопировать php-docker в ~/.local/php-docker
 
 chmod +x файлов:
-bin/php
-bin/composer
-
-Размещение файлов в ~/.local/bin/
+- php-docker/bin/php
+- php-docker/bin/composer
 
 Добавить в ~/.bashrc
 ```
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/php-docker/bin:$PATH"
 export EDITOR=nvim
 ```
 
