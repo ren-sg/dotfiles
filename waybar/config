@@ -1,0 +1,79 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 6,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+
+  "modules-center": [],
+
+  "modules-right": [
+    "tray",
+    "network",
+    "bluetooth",
+    "pulseaudio",
+    "clock",
+    "custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": true,
+    "format": "{name}",
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
+    }
+  },
+
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 80,
+    "separate-outputs": true
+  },
+
+  "tray": {
+    "spacing": 8
+  },
+
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  Wired",
+    "format-disconnected": "󰖪  Offline",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "on-click": "nm-connection-editor"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
+  },
+
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias} {device_battery_percentage}%",
+    "format-disabled": " off",
+    "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-connected": "{device_enumerate}",
+    "on-click": "blueman-manager"
+  },
+
+  "clock": {
+    "format": "󰥔 {:%d.%m %H:%M}",
+    "tooltip-format": "<big>{:%A, %d %B %Y}</big>"
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "wlogout"
+  }
+}
