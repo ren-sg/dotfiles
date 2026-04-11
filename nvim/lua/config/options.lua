@@ -5,10 +5,6 @@ local g = vim.g
 
 opt.shell = "/bin/bash"
 
--- Python hosts (как было)
-g.python2_host_prog = "/usr/bin/python2"
-g.python3_host_prog = "/home/qq/.config/nvim/python3/bin/python"
-
 -- Basic
 opt.encoding = "utf-8"
 opt.mouse = "a"
@@ -83,6 +79,7 @@ vim.opt.directory = {
   state .. "/swap//",
 }
 
+vim.opt.backupcopy = "yes"
 vim.opt.backup = true
 vim.opt.backupdir = {
   state .. "/backup//",

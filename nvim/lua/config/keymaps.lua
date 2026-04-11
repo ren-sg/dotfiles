@@ -10,12 +10,16 @@ map("n", "<F3>", ":NvimTreeToggle<cr>", opts)  -- file tree
 map("n", "<F4>", ":AerialToggle<cr>", opts)    -- outline
 map("n", "<leader>z", ":ZenMode<cr>", opts)    -- zen mode
 
+-- NvimTree root control
+map("n", "<leader>tr", ":NvimTreeChangeRoot<cr>", opts)
+map("n", "<leader>tf", ":NvimTreeFindFile<cr>", opts)
+
 -- -----------------------------------------------------------------------------
 -- Save
 -- -----------------------------------------------------------------------------
-map("i", "<C-s>", "<C-o>:update<cr>", opts)
-map("n", "<C-s>", ":update<cr>", opts)
-map("n", "<leader>s", ":update<cr>", opts)
+map("i", "<C-s>", "<C-o>:write<cr>", opts)
+map("n", "<C-s>", ":write<cr>", opts)
+map("n", "<leader>s", ":write<cr>", opts)
 
 -- -----------------------------------------------------------------------------
 -- Quit
@@ -150,3 +154,15 @@ map({ "n", "x", "o" }, "<leader>l", "<Plug>(easymotion-lineforward)", { remap = 
 map({ "n", "x", "o" }, "<leader>j", "<Plug>(easymotion-j)", { remap = true })
 map({ "n", "x", "o" }, "<leader>k", "<Plug>(easymotion-k)", { remap = true })
 map({ "n", "x", "o" }, "<leader>h", "<Plug>(easymotion-linebackward)", { remap = true })
+
+-- -----------------------------------------------------------------------------
+-- Telescope
+-- -----------------------------------------------------------------------------
+local builtin = require("telescope.builtin")
+map("n", "<leader>ff", builtin.find_files, { silent = true, desc = "Find files" })
+map("n", "<leader>ag", builtin.live_grep, { silent = true, desc = "Live grep" })
+map("n", "<leader><CR>", builtin.buffers, { silent = true, desc = "Buffers" })
+map("n", "<leader>y", builtin.current_buffer_fuzzy_find, { silent = true, desc = "Search in current buffer" })
+map("n", "<leader>`", builtin.marks, { silent = true, desc = "Marks" })
+map("n", "<leader>fc", builtin.colorscheme, { silent = true, desc = "Colorschemes" })
+map("n", "<leader>fh", builtin.help_tags, { silent = true, desc = "Help tags" })

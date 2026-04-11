@@ -34,11 +34,54 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
     config = function()
+      local api = require("nvim-tree.api")
+
+      local function change_root_and_cwd()
+        local node = api.tree.get_node_under_cursor()
+        if not node then
+          return
+        end
+
+        local path = node.absolute_path or node.link_to or node.name
+        if not path or path == "" then
+          return
+        end
+
+        if node.type ~= "directory" then
+          path = vim.fn.fnamemodify(path, ":h")
+        end
+
+        api.tree.change_root(path)
+        vim.cmd.cd(vim.fn.fnameescape(path))
+        print("root/cwd: " .. path)
+      end
+
       require("nvim-tree").setup({
         view = { width = 40 },
+        sync_root_with_cwd = false,
+        respect_buf_cwd = false,
+
         renderer = {
-          icons = { show = { file = true, folder = true, folder_arrow = true, git = true } },
+          icons = {
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = true,
+              git = true,
+            },
+          },
         },
+
+        on_attach = function(bufnr)
+          api.config.mappings.default_on_attach(bufnr)
+
+          vim.keymap.set("n", "C", change_root_and_cwd, {
+            buffer = bufnr,
+            noremap = true,
+            silent = true,
+            desc = "Tree: change root and cwd",
+          })
+        end,
       })
     end,
   },
@@ -103,9 +146,6 @@ require("lazy").setup({
   -- Tags (оставлено как было, но у тебя выключено настройкой)
   { "ludovicchabant/vim-gutentags", event = "VeryLazy" },
 
-  -- Lint
-  { "w0rp/ale", event = "VeryLazy" },
-
   -- Tmux
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
 
@@ -117,6 +157,32 @@ require("lazy").setup({
       require("zen-mode").setup()
     end,
   },
+
+  -- Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          layout_strategy = "horizontal",
+          layout_config = {
+            prompt_position = "top",
+          },
+          sorting_strategy = "ascending",
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+        },
+      })
+    end,
+  },
+
 }, {
   checker = { enabled = true },
   change_detection = { notify = false },
