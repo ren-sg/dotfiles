@@ -15,18 +15,60 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Colorscheme (must load early)
+  -- {
+  --   "chriskempson/base16-vim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.opt.background = "dark"
+  --     local ok = pcall(vim.cmd.colorscheme, "base16-ocean")
+  --     if not ok then
+  --       vim.cmd.colorscheme("default")
+  --     end
+  --   end,
+  -- },
   {
-    "chriskempson/base16-vim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.opt.background = "dark"
-      local ok = pcall(vim.cmd.colorscheme, "base16-ocean")
-      if not ok then
-        vim.cmd.colorscheme("default")
-      end
+      require("catppuccin").setup({
+        flavour = "frappe", -- latte / frappe / macchiato / mocha
+        transparent_background = false,
+
+        integrations = {
+          nvimtree = true,
+          telescope = true,
+          lsp_trouble = true,
+          gitsigns = true,
+          cmp = true,
+        },
+      })
+
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("tokyonight").setup({
+  --       -- style = "storm", -- storm / night / moon / day
+  --       -- style = "storm", -- storm / night / moon / day
+  --       -- style = "storm", -- storm / night / moon / day
+  --       style = "moon", -- storm / night / moon / day
+  --       transparent = false,
+  --       styles = {
+  --         comments = { italic = true },
+  --         keywords = { italic = false },
+  --       },
+  --     })
+  --
+  --     vim.cmd.colorscheme("tokyonight")
+  --   end,
+  -- },
 
   -- File tree (replaces NERDTree)
   {
@@ -73,7 +115,14 @@ require("lazy").setup({
         },
 
         on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
           api.config.mappings.default_on_attach(bufnr)
+
+          -- открыть файл + закрыть tree
+          vim.keymap.set("n", "<CR>", function()
+            api.node.open.edit()
+            api.tree.close()
+          end, { buffer = bufnr, noremap = true, silent = true, desc = "Open and close tree" })
 
           vim.keymap.set("n", "C", change_root_and_cwd, {
             buffer = bufnr,
@@ -98,6 +147,19 @@ require("lazy").setup({
           theme = "auto",
           section_separators = "",
           component_separators = "",
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = {
+            {
+              "filename",
+              path = 1, -- 1|3 cwd|absolute path
+            },
+          },
+          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
         },
       })
     end,
@@ -134,11 +196,90 @@ require("lazy").setup({
 
   -- Web / frontend
   { "mattn/emmet-vim", ft = { "html", "css", "javascript", "javascriptreact", "typescriptreact" } },
-  { "maksimr/vim-jsbeautify", ft = { "javascript", "json", "javascriptreact", "html", "css", "php" } },
-  { "sbdchd/neoformat", cmd = { "Neoformat" } },
+
+  -- Formatting
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+
+        json = { "prettier" },
+        html = { "prettier" },
+        css = { "prettier" },
+        scss = { "prettier" },
+        markdown = { "prettier" },
+
+        php = { "php_cs_fixer" },
+
+        -- sh = { "shfmt" },
+        -- zsh = { "shfmt" },
+      },
+      formatters = {
+        shfmt = {
+          prepend_args = { "-i", "4", "-ci", "-sr" },
+        },
+        php_cs_fixer = {
+          command = vim.fn.expand("~/.config/composer/vendor/bin/php-cs-fixer"),
+          prepend_args = {
+            "--using-cache=no",
+            "--allow-unsupported-php-version=yes",
+            "--config=" .. vim.fn.expand("~/.config/php-cs-fixer/.php-cs-fixer.php"),
+          },
+        },
+      },
+
+      -- format_on_save = {
+      --   lsp_format = "fallback",
+      --   timeout_ms = 500,
+      -- },
+    },
+  },
 
   -- Git
-  { "tpope/vim-fugitive", cmd = { "G", "Git", "Gstatus", "Gwrite", "Gcommit", "Gpush", "Gpull", "Gblame" } },
+  {
+    "tpope/vim-fugitive",
+    cmd = {
+      "Git",
+      "G",
+      "Gdiffsplit",
+      "Gvdiffsplit",
+      "Gwrite",
+      "Gread",
+      "Ggrep",
+      "GMove",
+      "GDelete",
+      "GBrowse",
+    },
+  },
+
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim", -- для норм diff UI
+    },
+    cmd = "Neogit",
+    config = function()
+      require("neogit").setup({
+        integrations = {
+          diffview = true,
+        },
+      })
+    end,
+  },
+
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose" },
+  },
 
   -- Tmux
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
@@ -214,7 +355,6 @@ require("lazy").setup({
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-      -- icons for completion menu (LSP kinds)
       "onsails/lspkind.nvim",
     },
     config = function()
@@ -253,7 +393,7 @@ require("lazy").setup({
       vim.lsp.config("phpactor", {
         capabilities = capabilities,
         cmd = {
-          "/usr/bin/php8.3",
+          vim.fn.exepath("php"),
           vim.fn.expand("~/.local/share/nvim/mason/packages/phpactor/phpactor.phar"),
           "language-server",
         },
@@ -319,7 +459,6 @@ require("lazy").setup({
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
-
 }, {
   checker = { enabled = true },
   change_detection = { notify = false },

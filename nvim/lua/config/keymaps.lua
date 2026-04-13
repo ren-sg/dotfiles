@@ -6,13 +6,13 @@ local opts = { noremap = true, silent = true }
 -- -----------------------------------------------------------------------------
 -- Plugins: toggles (мы убрали keys из lazy.lua, значит маппим тут)
 -- -----------------------------------------------------------------------------
-map("n", "<F3>", ":NvimTreeToggle<cr>", opts)  -- file tree
-map("n", "<F4>", ":AerialToggle<cr>", opts)    -- outline
-map("n", "<leader>z", ":ZenMode<cr>", opts)    -- zen mode
+map("n", "<F3>", ":NvimTreeToggle<cr>", opts) -- file tree
+map("n", "<F4>", ":AerialToggle<cr>", opts) -- outline
+map("n", "<leader>z", ":ZenMode<cr>", opts) -- zen mode
 
 -- NvimTree root control
 map("n", "<leader>tr", ":NvimTreeChangeRoot<cr>", opts)
-map("n", "<leader>tf", ":NvimTreeFindFile<cr>", opts)
+map("n", "<leader>tf", ":NvimTreeFindFile<cr>", { noremap = true, silent = true, desc = "Find current file in tree" })
 
 -- -----------------------------------------------------------------------------
 -- Save
@@ -28,8 +28,38 @@ map("n", "<leader>s", ":write!<cr>", opts)
 map("i", "<C-q>", "<esc>:q<cr>", opts)
 map("n", "<C-q>", ":q<cr>", opts)
 map("v", "<C-q>", "<esc>", opts)
-map("n", "<leader>q", ":q<cr>", opts)
 map("n", "<leader>Q", ":qa!<cr>", opts)
+
+-- map("n", "<leader>q", ":q<cr>", opts)
+-- Закрывает буфер figutive и открывает текущий файл. Нужно для сравнения diff.
+-- В обычном режиме закрывает файл
+map("n", "<leader>q", function()
+  if vim.wo.diff then
+    local curwin = vim.api.nvim_get_current_win()
+
+    vim.cmd("diffoff!")
+
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      if win ~= curwin and vim.api.nvim_win_is_valid(win) then
+        local buf = vim.api.nvim_win_get_buf(win)
+        local name = vim.api.nvim_buf_get_name(buf)
+        local ft = vim.bo[buf].filetype
+
+        if vim.wo[win].diff or ft == "fugitive" or name:match("^fugitive://") then
+          pcall(vim.api.nvim_win_close, win, true)
+        end
+      end
+    end
+
+    return
+  end
+
+  if vim.bo.modified then
+    vim.notify("Buffer has unsaved changes", vim.log.levels.WARN)
+    return
+  end
+  vim.cmd("q")
+end, { noremap = true, silent = true, desc = "Quit window or close diff" })
 
 -- -----------------------------------------------------------------------------
 -- New line below / above
@@ -124,24 +154,39 @@ map("n", "<M-\\>", ":TmuxNavigatePrevious<cr>", opts)
 -- -----------------------------------------------------------------------------
 -- Git (fugitive)
 -- -----------------------------------------------------------------------------
-map("n", "<leader>ga", ":Gwrite<cr>", opts)
-map("n", "<leader>gc", ":Gcommit<cr>", opts)
-map("n", "<leader>gsh", ":Gpush<cr>", opts)
-map("n", "<leader>gll", ":Gpull<cr>", opts)
-map("n", "<leader>gs", ":Gstatus<cr>", opts)
-map("n", "<leader>gb", ":Gblame<cr>", opts)
+-- map("n", "<leader>ga", ":Gwrite<cr>", opts)
+-- map("n", "<leader>gc", ":Gcommit<cr>", opts)
+-- map("n", "<leader>gsh", ":Gpush<cr>", opts)
+-- map("n", "<leader>gll", ":Gpull<cr>", opts)
+-- map("n", "<leader>gs", ":Gstatus<cr>", opts)
+-- map("n", "<leader>gb", ":Gblame<cr>", opts)
 map("n", "<leader>gd", ":Gvdiffsplit!<cr>", opts)
-map("n", "<leader>gr", ":Gremove<cr>", opts)
+-- map("n", "<leader>gr", ":Gremove<cr>", opts)
 map("n", "gdh", ":diffget //2<cr>", opts)
 map("n", "gdl", ":diffget //3<cr>", opts)
 
 -- -----------------------------------------------------------------------------
--- Neoformat
+-- Neogit
 -- -----------------------------------------------------------------------------
-map("n", "<leader>nf", ":Neoformat<cr>", opts)
+map("n", "<leader>gq", "<cmd>DiffviewClose<cr>", { silent = true, desc = "Close Diffview" })
+map("n", "<leader>gg", "<cmd>Neogit<cr>", { silent = true, desc = "Neogit" })
 
--- JsBeautify (global; filetype-local in autocmds.lua)
-map("n", "<leader>bf", ":call JsBeautify()<cr>", opts)
+-- -----------------------------------------------------------------------------
+-- Formatter
+-- -----------------------------------------------------------------------------
+map("n", "<leader>f", function()
+  local name = vim.api.nvim_buf_get_name(0)
+  if name:match("^fugitive://") then
+    vim.notify("Format disabled for fugitive buffer", vim.log.levels.WARN)
+    return
+  end
+
+  require("conform").format({
+    lsp_format = "fallback",
+    async = false,
+    timeout_ms = 1000,
+  })
+end, { silent = true, desc = "Format buffer" })
 
 -- -----------------------------------------------------------------------------
 -- EasyMotion (limit modes explicitly; remap for <Plug>)
@@ -164,6 +209,10 @@ map("n", "<leader>y", builtin.current_buffer_fuzzy_find, { silent = true, desc =
 map("n", "<leader>`", builtin.marks, { silent = true, desc = "Marks" })
 map("n", "<leader>fc", builtin.colorscheme, { silent = true, desc = "Colorschemes" })
 map("n", "<leader>fh", builtin.help_tags, { silent = true, desc = "Help tags" })
+
+map("n", "<leader>gs", builtin.git_status, { silent = true, desc = "Git status" })
+map("n", "<leader>gc", builtin.git_commits, { silent = true, desc = "Git commits" })
+map("n", "<leader>gb", builtin.git_branches, { silent = true, desc = "Git branches" })
 
 map("n", "K", vim.lsp.buf.hover, opts)
 

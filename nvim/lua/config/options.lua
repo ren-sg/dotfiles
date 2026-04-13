@@ -99,19 +99,6 @@ g.EasyMotion_smartcase = 1
 -- Tmux navigator
 g.tmux_navigator_no_mappings = 1
 
--- Neoformat
-g.neoformat_basic_format_align = 1
-g.neoformat_basic_format_retab = 1
-g.neoformat_basic_format_trim = 1
-g.neoformat_only_msg_on_error = 1
-g.neoformat_try_formatprg = 1
-g.neoformat_php_phpcsfixer = {
-  exe = "php-cs-fixer",
-  replace = 1,
-  args = { "fix", "--using-cache=no", "--config=/home/renal/.config/composer/vendor/conf/.php-cs.dist" },
-}
-g.neoformat_enabled_php = { "phpcsfixer" }
-
 -- Neovide
 g.neovide_refresh_rate = 165
 g.neovide_no_idle = true
