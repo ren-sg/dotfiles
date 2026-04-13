@@ -166,3 +166,14 @@ map("n", "<leader>fc", builtin.colorscheme, { silent = true, desc = "Colorscheme
 map("n", "<leader>fh", builtin.help_tags, { silent = true, desc = "Help tags" })
 
 map("n", "K", vim.lsp.buf.hover, opts)
+
+-- LSP navigation/actions
+map("n", "gd", vim.lsp.buf.definition, opts)
+map("n", "gD", vim.lsp.buf.declaration, opts)
+map("n", "gi", vim.lsp.buf.implementation, opts)
+map("n", "gr", vim.lsp.buf.references, opts)
+map("n", "<leader>rn", vim.lsp.buf.rename, opts)
+map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+map("n", "<leader>e", vim.diagnostic.open_float, opts)
+map("n", "[d", vim.diagnostic.goto_prev, opts)
+map("n", "]d", vim.diagnostic.goto_next, opts)

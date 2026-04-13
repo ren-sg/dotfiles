@@ -99,13 +99,6 @@ g.EasyMotion_smartcase = 1
 -- Tmux navigator
 g.tmux_navigator_no_mappings = 1
 
--- Gutentags (оставлено, но выключено как у тебя)
-g.gutentags_modules = { "ctags", "gtags_cscope" }
-g.gutentags_project_root = { ".root" }
-g.gutentags_cache_dir = vim.fn.expand("~/.cache/tags")
-g.gutentags_auto_add_gtags_cscope = 0
-g.gutentags_enabled = 0
-
 -- Neoformat
 g.neoformat_basic_format_align = 1
 g.neoformat_basic_format_retab = 1

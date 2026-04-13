@@ -30,3 +30,20 @@ docker build -t local/php-cli:8.3-dev --build-arg PHP_VERSION=8.3 ~/.local/php-d
 ```
 docker build -t local/php-cli:8.5-dev --build-arg PHP_VERSION=8.5 ~/.local/php-docker/image
 ```
+
+#### Для поддержки phpactor в neovim:
+___
+```bash
+sudo apt update
+sudo apt install -y software-properties-common
+
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+```
+
+Установка php
+```bash
+sudo apt install php8.3-cli php8.3-mbstring php8.3-xml php8.3-curl
+```
+
+

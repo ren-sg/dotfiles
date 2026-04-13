@@ -134,17 +134,11 @@ require("lazy").setup({
 
   -- Web / frontend
   { "mattn/emmet-vim", ft = { "html", "css", "javascript", "javascriptreact", "typescriptreact" } },
-  { "pangloss/vim-javascript", ft = { "javascript" } },
-  { "mxw/vim-jsx", ft = { "javascript", "javascriptreact" } },
   { "maksimr/vim-jsbeautify", ft = { "javascript", "json", "javascriptreact", "html", "css", "php" } },
   { "sbdchd/neoformat", cmd = { "Neoformat" } },
 
   -- Git
-  { "airblade/vim-gitgutter", event = "VeryLazy" },
   { "tpope/vim-fugitive", cmd = { "G", "Git", "Gstatus", "Gwrite", "Gcommit", "Gpush", "Gpull", "Gblame" } },
-
-  -- Tags (оставлено как было, но у тебя выключено настройкой)
-  { "ludovicchabant/vim-gutentags", event = "VeryLazy" },
 
   -- Tmux
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
@@ -258,6 +252,11 @@ require("lazy").setup({
 
       vim.lsp.config("phpactor", {
         capabilities = capabilities,
+        cmd = {
+          "/usr/bin/php8.3",
+          vim.fn.expand("~/.local/share/nvim/mason/packages/phpactor/phpactor.phar"),
+          "language-server",
+        },
       })
 
       vim.lsp.enable({
