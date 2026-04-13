@@ -46,4 +46,22 @@ sudo apt update
 sudo apt install php8.3-cli php8.3-mbstring php8.3-xml php8.3-curl
 ```
 
+### .phpactor.json
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/phpactor/phpactor/master/res/schema/phpactor.schema.json",
 
+  "indexer.exclude_patterns": [
+    "node_modules",
+    "vendor/bin",
+    "bitrix/cache",
+    "bitrix/managed_cache",
+    "bitrix/stack_cache",
+    "upload",
+    ".git"
+  ],
+
+  "language_server.diagnostics_on_update": false,
+  "language_server.diagnostics_on_open": true
+}
+```
