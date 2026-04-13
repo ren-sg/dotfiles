@@ -17,9 +17,10 @@ map("n", "<leader>tf", ":NvimTreeFindFile<cr>", opts)
 -- -----------------------------------------------------------------------------
 -- Save
 -- -----------------------------------------------------------------------------
-map("i", "<C-s>", "<C-o>:write<cr>", opts)
-map("n", "<C-s>", ":write<cr>", opts)
-map("n", "<leader>s", ":write<cr>", opts)
+-- Save (smart save: overwrite if needed)
+map("i", "<C-s>", "<C-o>:write!<cr>", opts)
+map("n", "<C-s>", ":write!<cr>", opts)
+map("n", "<leader>s", ":write!<cr>", opts)
 
 -- -----------------------------------------------------------------------------
 -- Quit
@@ -71,9 +72,6 @@ map("n", "<C-l>", "<C-w>l", opts)
 map("v", "<C-c>", '"+yi', opts)
 map("v", "<C-v>", 'c<esc>"+p', opts)
 map("i", "<C-v>", "<C-r><C-o>+", opts)
-
--- Disable K
-map("n", "K", "<nop>", opts)
 
 -- Like vim-vinegar (устойчиво, без <C-R>=...)
 map("n", "-", function()
@@ -166,3 +164,5 @@ map("n", "<leader>y", builtin.current_buffer_fuzzy_find, { silent = true, desc =
 map("n", "<leader>`", builtin.marks, { silent = true, desc = "Marks" })
 map("n", "<leader>fc", builtin.colorscheme, { silent = true, desc = "Colorschemes" })
 map("n", "<leader>fh", builtin.help_tags, { silent = true, desc = "Help tags" })
+
+map("n", "K", vim.lsp.buf.hover, opts)

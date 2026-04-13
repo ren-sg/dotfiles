@@ -106,11 +106,6 @@ g.gutentags_cache_dir = vim.fn.expand("~/.cache/tags")
 g.gutentags_auto_add_gtags_cscope = 0
 g.gutentags_enabled = 0
 
--- ALE
-g.ale_sign_error = ">>"
-g.ale_sign_warning = "--"
-g.ale_set_highlights = 1
-
 -- Neoformat
 g.neoformat_basic_format_align = 1
 g.neoformat_basic_format_retab = 1
