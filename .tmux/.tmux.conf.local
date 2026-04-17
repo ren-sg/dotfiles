@@ -431,12 +431,12 @@ tmux_conf_uninstall_plugins_on_reload=true
 # # /!\ do not remove the previous line
 # Use Alt-vim keys without prefix key to switch panes
 bind -n M-h select-pane -L
-bind -n M-j select-pane -D 
+bind -n M-j select-pane -D
 bind -n M-k select-pane -U
 bind -n M-l select-pane -R
 
 set -g default-command /usr/bin/fish
 set -g default-shell /usr/bin/fish
 
-set -g default-terminal "screen-256color"
-set-option -ga terminal-overrides ",*256col*:Tc"
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*:Tc"

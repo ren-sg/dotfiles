@@ -36,7 +36,10 @@ sudo npm install -g prettier
 
 ```bash
 composer global require php-cs-fixer/shim
-export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+//composer global require phpactor/phpactor
+
+echo 'export PATH="$HOME/.config/composer/vendor/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 Скопировать php/.php_cs_fixer в ~/.config/php-cs-fixer/.php-cs-fixer.php
@@ -101,21 +104,54 @@ rm stylua.zip
 
 #### .phpactor.json
 
+```bash
+mkdir -p ~/.local/bin
+curl -Lo ~/.local/bin/phpactor https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
+chmod +x ~/.local/bin/phpactor
+```
+
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/phpactor/phpactor/master/res/schema/phpactor.schema.json",
-
   "indexer.exclude_patterns": [
-    "node_modules",
-    "vendor/bin",
-    "bitrix/cache",
-    "bitrix/managed_cache",
-    "bitrix/stack_cache",
-    "upload",
-    ".git"
+    "/vendor/**",
+    "/node_modules/**",
+    "/upload/**",
+    "/bitrix/cache/**",
+    "/bitrix/managed_cache/**",
+    "/bitrix/stack_cache/**",
+    "/bitrix/tmp/**",
+    "/bitrix/backup/**",
+
+    "/bitrix/modules/**/install/**",
+
+    "/local/modules/**/install/**",
+
+    "/**/install/**",
+
+    "/.git/**"
   ],
 
+  "indexer.follow_symlinks": false,
+
   "language_server.diagnostics_on_update": false,
-  "language_server.diagnostics_on_open": true
+  "language_server.diagnostics_on_save": true,
+
+  "completion_worse.completor.class_member.visibility": [
+    "public",
+    "protected",
+    "private"
+  ],
+
+  "code_transform.import_globals": true
 }
+```
+
+### Tmux
+
+---
+
+```bash
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*:Tc"
 ```

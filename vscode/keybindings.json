@@ -1,0 +1,114 @@
+[
+  // F3: tree toggle
+  {
+    "key": "f3",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+
+  // F4: outline
+  {
+    "key": "f4",
+    "command": "outline.focus"
+  },
+
+  // <leader>z
+  {
+    "key": "space z",
+    "command": "workbench.action.toggleZenMode",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+
+  // quit
+  {
+    "key": "space q",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+
+  // quickfix approx
+  {
+    "key": "] q",
+    "command": "editor.action.marker.next",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "[ q",
+    "command": "editor.action.marker.prev",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+
+  // buffers
+  {
+    "key": "] b",
+    "command": "workbench.action.nextEditor",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "[ b",
+    "command": "workbench.action.previousEditor",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+
+  // window movement
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.focusBelowGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.focusAboveGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.focusRightGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+
+  // <Tab>
+  {
+    "key": "tab",
+    "command": "editor.toggleFold",
+    "when": "editorTextFocus && vim.mode == 'Normal' && foldingEnabled"
+  },
+
+  // format
+  {
+    "key": "space =",
+    "command": "editor.action.formatDocument",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !editorReadonly"
+  },
+
+  // telescope analogs
+  {
+    "key": "space f f",
+    "command": "workbench.action.quickOpen",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space a g",
+    "command": "workbench.action.findInFiles",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space enter",
+    "command": "workbench.action.showAllEditorsByMostRecentlyUsed",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space y",
+    "command": "actions.find",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space `",
+    "command": "editor.action.goToMark",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  }
+]

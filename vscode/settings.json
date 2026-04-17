@@ -1,0 +1,107 @@
+{
+  // Тема
+  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.iconTheme": "material-icon-theme",
+
+  // Шрифт редактора
+  "editor.fontFamily": "FiraCode Nerd Font, monospace",
+  "editor.fontSize": 14,
+  "editor.fontWeight": "400",
+  "editor.fontLigatures": false,
+  "editor.fontVariations": false,
+  "editor.lineNumbers": "on",
+
+  // Базовые настройки редактора
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+  "editor.semanticHighlighting.enabled": false,
+  "editor.minimap.enabled": true,
+  "editor.stickyScroll.enabled": false,
+  "editor.renderValidationDecorations": "on",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": []
+  },
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "solid",
+
+  // Внешний вид дерева / explorer
+  "explorer.compactFolders": false,
+  "explorer.decorations.badges": false,
+  "explorer.decorations.colors": false,
+  "explorer.openEditors.visible": 1,
+  "workbench.tree.indent": 16,
+  "workbench.tree.renderIndentGuides": "always",
+
+  // Убрать лишний git-шум в дереве
+  "git.decorations.enabled": false,
+
+  // Vim
+  "vim.leader": "<space>",
+  "vim.overrideCopy": false,
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.ignorecase": true,
+  "vim.smartcase": true,
+
+  // Общие удобства
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "window.zoomLevel": 1,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+
+  "vim.handleKeys": {
+    "<C-h>": false,
+    "<C-j>": false,
+    "<C-k>": false,
+    "<C-l>": false,
+    "<C-f>": false,
+    "<C-a>": false,
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-x>": false,
+    "<C-s>": false
+  },
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "php-cs-fixer.onsave": false,
+  "php-cs-fixer.config": "~/.config/php-cs-fixer/.php-cs-fixer.php",
+  "php-cs-fixer.executablePath": "~/.config/composer/vendor/bin/php-cs-fixer",
+
+  "intelephense.format.enable": false
+}
