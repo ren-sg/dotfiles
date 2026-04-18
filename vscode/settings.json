@@ -1,12 +1,22 @@
 {
   // Тема
-  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.iconTheme": "material-icon-theme",
+
+  //AI
+  "chat.defaultModel": "qwen3.5:4b (ollama)",
+  "inlineChat.defaultModel": "qwen3.5:4b (ollama)",
+  "github.copilot.enable": {
+    "*": false
+  },
+  "chat.experimental.providerFiltering": true,
+  "chat.promptFiles": true,
+  "chat.defaultSystemPrompt": "Отвечай всегда на русском языке.",
 
   // Шрифт редактора
   "editor.fontFamily": "FiraCode Nerd Font, monospace",
   "editor.fontSize": 14,
-  "editor.fontWeight": "400",
+  "editor.fontWeight": "401",
   "editor.fontLigatures": false,
   "editor.fontVariations": false,
   "editor.lineNumbers": "on",
@@ -61,7 +71,11 @@
     "<C-c>": false,
     "<C-v>": false,
     "<C-x>": false,
-    "<C-s>": false
+    "<C-s>": false,
+    "<C-p>": false,
+    "<C-t>": false,
+    "<C-n>": false,
+    "<C-w>": false
   },
   "editor.formatOnSave": false,
   "editor.formatOnPaste": false,
@@ -103,5 +117,49 @@
   "php-cs-fixer.config": "~/.config/php-cs-fixer/.php-cs-fixer.php",
   "php-cs-fixer.executablePath": "~/.config/composer/vendor/bin/php-cs-fixer",
 
-  "intelephense.format.enable": false
+  "intelephense.format.enable": false,
+  "intelephense.diagnostics.run": "onSave",
+
+  "intelephense.files.exclude": [
+    "**/.git/**",
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/upload/**",
+    "**/bitrix/cache/**",
+    "**/bitrix/managed_cache/**",
+    "**/bitrix/stack_cache/**",
+    "**/bitrix/tmp/**",
+    "**/bitrix/backup/**",
+    "**/bitrix/modules/**/install/**",
+    "**/local/modules/**/install/**",
+    "**/install/**"
+  ],
+
+  "intelephense.references.exclude": [
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/upload/**",
+    "**/bitrix/cache/**",
+    "**/bitrix/managed_cache/**",
+    "**/bitrix/stack_cache/**",
+    "**/bitrix/tmp/**",
+    "**/bitrix/backup/**",
+    "**/bitrix/modules/**/install/**",
+    "**/local/modules/**/install/**",
+    "**/install/**"
+  ],
+
+  "intelephense.rename.exclude": [
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/upload/**",
+    "**/bitrix/cache/**",
+    "**/bitrix/managed_cache/**",
+    "**/bitrix/stack_cache/**",
+    "**/bitrix/tmp/**",
+    "**/bitrix/backup/**",
+    "**/bitrix/modules/**/install/**",
+    "**/local/modules/**/install/**",
+    "**/install/**"
+  ]
 }
