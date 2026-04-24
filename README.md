@@ -150,6 +150,13 @@ chmod +x ~/.local/bin/phpactor
 ### Tmux
 
 ---
+```bash
+$ mkdir -p ~/Git && mkdir -p ~/.config/tmux
+$ git clone --single-branch https://github.com/gpakosz/.tmux.git ~/Git/gpakosz/tmux
+$ ln -s $HOME/Git/gpakosz/tmux/.tmux.conf ~/.config/tmux/tmux.conf
+$ cp ~/Git/gpakosz/tmux/.tmux.conf.local ~/tmux.conf.local
+
+```
 
 ```bash
 set -g default-terminal "tmux-256color"
