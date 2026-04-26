@@ -78,6 +78,11 @@ docker build -t local/php-cli:8.5-dev --build-arg PHP_VERSION=8.5 ~/.local/php-d
 ### NEOVIM
 
 ---
+**Markdown**
+
+```bash
+sudo pacman -S tree-sitter tree-sitter-cli tree-sitter-markdown
+```
 
 **Shfmt + stylua**
 

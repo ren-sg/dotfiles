@@ -1,0 +1,34 @@
+{
+  "$schema": "https://raw.githubusercontent.com/phpactor/phpactor/master/res/schema/phpactor.schema.json",
+  "indexer.exclude_patterns": [
+    "/vendor/**",
+    "/node_modules/**",
+    "/upload/**",
+    "/bitrix/cache/**",
+    "/bitrix/managed_cache/**",
+    "/bitrix/stack_cache/**",
+    "/bitrix/tmp/**",
+    "/bitrix/backup/**",
+
+    "/bitrix/modules/**/install/**",
+
+    "/local/modules/**/install/**",
+
+    "/**/install/**",
+
+    "/.git/**"
+  ],
+
+  "indexer.follow_symlinks": false,
+
+  "language_server.diagnostics_on_update": false,
+  "language_server.diagnostics_on_save": true,
+
+  "completion_worse.completor.class_member.visibility": [
+    "public",
+    "protected",
+    "private"
+  ],
+
+  "code_transform.import_globals": true
+}
